@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using Android.Util;
 
 namespace EpicDungeonsRPG;
-public class GameManager {
-    enum gameState{
+public class GameManager
+{
+    private enum gameState
+    {
         startMenu, battle, inventory
     }
 
@@ -13,40 +15,45 @@ public class GameManager {
     private BattleManager battle;
     private startMenuManager startMenu;
     private InventoryManager inventory;
-    public GameManager(){
+    public GameManager()
+    {
         currentState = gameState.battle;
         battle = new BattleManager();
         startMenu = new startMenuManager();
         inventory = new InventoryManager();
     }
-    public void Update(){
-        switch(currentState){
+    public void Update()
+    {
+        switch (currentState)
+        {
             case gameState.battle:
-            battle.Update();
-            break;
+                battle.Update();
+                break;
             case gameState.startMenu:
-            startMenu.Update();
-            break;
+                startMenu.Update();
+                break;
             case gameState.inventory:
-            inventory.Update();
-            break;
+                inventory.Update();
+                break;
             default:
-            break;
+                break;
         }
     }
-    public void Draw(){
-        switch(currentState){
+    public void Draw()
+    {
+        switch (currentState)
+        {
             case gameState.battle:
-            battle.Draw();
-            break;
+                battle.Draw();
+                break;
             case gameState.startMenu:
-            startMenu.Draw();
-            break;
+                startMenu.Draw();
+                break;
             case gameState.inventory:
-            inventory.Draw();
-            break;
+                inventory.Draw();
+                break;
             default:
-            break;
+                break;
         }
     }
 }

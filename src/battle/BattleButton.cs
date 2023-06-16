@@ -10,36 +10,42 @@ using System;
 namespace EpicDungeonsRPG;
 
 public struct BattleButton{
-
+    public byte id;
     public Vector2 position;
     private Texture2D texture;
     private Rectangle sourceRect;
-
-    public bool clicked = false;
     public bool isEnabled = true;
     private float opacity = 1f;
-    public BattleButton(Vector2 position, Texture2D texture)
+    public BattleButton(Vector2 position, Texture2D texture, byte id)
     {
         this.position = position;
         this.texture = texture;
-
+        this.id = id;
         sourceRect = new Rectangle(0, 0, texture.Width, texture.Height);
     }
 
-    private void OnClick(Vector2 position){
-        var endPosition = new Vector2(this.position.X+(texture.Width*6f), this.position.Y+(texture.Height*6f));
-        if((this.position.X <= position.X && this.position.Y <= position.Y && endPosition.X >= position.X && endPosition.Y >= position.Y)&&(isEnabled)){
-            isEnabled = false;
-            clicked = true;
-        }
-        Log.Info("cosTakiego", "mousePos: "+position+" btnXY:"+this.position+"btnEndXY"+endPosition);
-    }
-    public void Update(){
+    public void Update(Arrow arrow){
         var touch = TouchPanel.GetState();
 
         foreach (var item in touch)
         {  
-            OnClick(item.Position);
+            
+            var endPosition = new Vector2(this.position.X+(texture.Width*6f), this.position.Y+(texture.Height*6f));
+
+            if(arrow.arrowState == ArrowState.moving && isEnabled==false){
+                arrow.arrowState = ArrowState.finished;
+                isEnabled = true;
+                arrow.lastButton = id;
+            }
+
+            if((this.position.X <= item.Position.X && this.position.Y <= item.Position.Y && endPosition.X >= item.Position.X && endPosition.Y >= item.Position.Y)&&(isEnabled)){
+                isEnabled = !isEnabled;
+                arrow.arrowState = ArrowState.moving;
+            }
+                
+                
+            // Log.Info("cosTakiego", "mousePos: "+item.Position+" btnXY:"+this.position+"btnEndXY"+endPosition);
+            
         }
 
         if(!isEnabled) opacity = 0.5f;
