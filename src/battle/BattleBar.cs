@@ -60,14 +60,16 @@ public struct BattleBar
 
     private void DrawAreas()
     {
+        var helper = 0.95f;
         foreach (var item in this.Areas)
         {
             Rectangle rect;
-            if (item.name != HitAreaType.critical) rect = new Rectangle(item.sourceRect.X, item.sourceRect.Y, item.sourceRect.Width + 1, item.sourceRect.Height);
+            if (item.name != HitAreaType.critical) rect = new Rectangle(item.sourceRect.X, item.sourceRect.Y, item.sourceRect.Width+1, item.sourceRect.Height);
             else rect = new Rectangle(item.sourceRect.X, item.sourceRect.Y, item.sourceRect.Width, item.sourceRect.Height);
 
             Global.spriteBatch.Draw(item.texture, item.position, rect, Color.White, 0f,
-            new Vector2(0, 0), scale, SpriteEffects.None, 0.95f);
+            new Vector2(0, 0), scale, SpriteEffects.None, helper);
+            helper += 0.01f;
         }
     }
     public void Update()

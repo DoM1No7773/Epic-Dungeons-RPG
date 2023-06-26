@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Android.Util;
 
 namespace EpicDungeonsRPG;
@@ -35,6 +36,7 @@ public class Main : Game
     protected override void Update(GameTime gameTime)
     {
         Global.gameTime = gameTime;
+        Global.touchState =TouchPanel.GetState();
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
         gameManager.Update();

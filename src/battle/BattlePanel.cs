@@ -45,7 +45,7 @@ public struct BattlePanel
     public void Draw()
     {
         var scale = 45f;
-        Global.spriteBatch.Draw(texture, position, sourceRect, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0f);
+        Global.spriteBatch.Draw(texture, position, sourceRect, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0.01f);
 
         attackbtn.Draw();
         defendbtn.Draw();

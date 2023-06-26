@@ -25,7 +25,7 @@ public struct BattleButton{
     }
 
     public void Update(Arrow arrow){
-        var touch = TouchPanel.GetState();
+        var touch =Global.touchState;
 
         foreach (var item in touch)
         {  
@@ -42,9 +42,6 @@ public struct BattleButton{
                 isEnabled = !isEnabled;
                 arrow.arrowState = ArrowState.moving;
             }
-                
-                
-            // Log.Info("cosTakiego", "mousePos: "+item.Position+" btnXY:"+this.position+"btnEndXY"+endPosition);
             
         }
 

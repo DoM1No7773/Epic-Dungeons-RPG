@@ -4,52 +4,64 @@ using Microsoft.Xna.Framework.Input;
 using Android.Util;
 
 namespace EpicDungeonsRPG;
+
+public enum GameState{
+    startMenu, battle, inventory
+}
 public class GameManager
 {
-    private enum gameState
-    {
-        startMenu, battle, inventory
-    }
-
-    gameState currentState;
-    private BattleManager battle;
-    private startMenuManager startMenu;
+    private StartMenuManager startMenu;
     private InventoryManager inventory;
     public GameManager()
     {
-        currentState = gameState.battle;
-        battle = new BattleManager();
-        startMenu = new startMenuManager();
+        Global.gameState = GameState.startMenu;
+        Global.playerAccount = new PlayerAccount();
+        Global.battle = new BattleManager();
+        startMenu = new StartMenuManager();
         inventory = new InventoryManager();
+        Global.level = new Level();
     }
+
+    private float waitSecs = 2;
     public void Update()
-    {
-        switch (currentState)
-        {
-            case gameState.battle:
-                battle.Update();
-                break;
-            case gameState.startMenu:
-                startMenu.Update();
-                break;
-            case gameState.inventory:
-                inventory.Update();
-                break;
-            default:
-                break;
+    {   
+        if(Global.battle.battleState == BattleState.victory || Global.battle.battleState == BattleState.defeat){
+            waitSecs -= (float) Global.gameTime.ElapsedGameTime.TotalSeconds;
+            if(waitSecs <= 0){
+                Global.gameState = GameState.startMenu;
+                waitSecs = 2;
+                if(Global.battle.battleState == BattleState.victory)
+                    Global.playerAccount.AddGold(Global.battle.gold);
+                Global.battle.battleState = BattleState.none;
+            }
         }
+
+            switch (Global.gameState)
+            {
+                case GameState.battle:
+                    Global.battle.Update();
+                    break;
+                case GameState.startMenu:
+                    startMenu.Update();
+                    break;
+                case GameState.inventory:
+                    inventory.Update();
+                    break;
+                default:
+                    break;
+            }
     }
     public void Draw()
     {
-        switch (currentState)
+        switch (Global.gameState)
         {
-            case gameState.battle:
-                battle.Draw();
+            case GameState.battle:
+                Global.battle.Draw();
                 break;
-            case gameState.startMenu:
+            case GameState.startMenu:
                 startMenu.Draw();
                 break;
-            case gameState.inventory:
+            case GameState.inventory:
                 inventory.Draw();
                 break;
             default:

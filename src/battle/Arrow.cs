@@ -68,8 +68,6 @@ public class Arrow : Basic2D
             var itemStart = (moveArea.X) + ((Areas[i].sourceRect.X) / 42f * (moveArea.Y-moveArea.X));
             var itemEnd =  (moveArea.X) + ((Areas[i].sourceRect.X + Areas[i].sourceRect.Width) / 42f * (moveArea.Y-moveArea.X));
 
-            //  Log.Info("cosTakiego","::"+Areas[i].name+" cn:"+centeredPosition+" is: "+itemStart+" ie: "+itemEnd+" moveAX:"+moveArea.X+" moveAY:"+moveArea.Y+" sr:"+Areas[i].sourceRect);
-
             if (centeredPosition >= itemStart && centeredPosition <= itemEnd)
             {
                 switch(Areas[i].name){
@@ -90,10 +88,11 @@ public class Arrow : Basic2D
                         defPower = 100;
                     break;
                     default:
+                        power = 0;
+                        defPower = 0;
                     break;
                 }
-                Log.Info("cosTakiego", "::" + Areas[i].name);
-                // lastButton = 0;
+
                 arrowState = ArrowState.notStarted;
             }
         }

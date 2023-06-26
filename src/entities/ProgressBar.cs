@@ -8,7 +8,7 @@ public struct ProgressBar{
     private Texture2D background;
     private Texture2D foreground;
     private Vector2 position;
-    private float maxValue;
+    public float maxValue;
     public float currentValue;
     private Rectangle backgroundRect;
     private Rectangle foregroundRect;
