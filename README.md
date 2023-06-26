@@ -4,9 +4,9 @@ C# Monogame simple game project
 
 ### Required to build
 
-[Dotnet SDK 6.0 or higher](https://dotnet.microsoft.com/en-us/download) 
-[OpenJDK 11](https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-11)
-[Android SDK 31](https://developer.android.com/studio) and  build tools
+- [Dotnet SDK 6.0 or higher](https://dotnet.microsoft.com/en-us/download) 
+- [OpenJDK 11](https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-11)
+- [Android SDK 31](https://developer.android.com/studio) and  build tools
 android phone with usb cable to run app
 
 ### to build and run
